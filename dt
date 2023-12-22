@@ -1,0 +1,21 @@
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: '<username>',
+  host: 'localhost',
+  database: 'linksAPI',
+  password: '<password>',
+12/13/23, 10:23 AM HW 6: PERN Stack Project
+https://md2pdf.netlify.app 8/11
+  port: 5432,
+})
+const getLinks = (req, res) => {
+  pool.query('SELECT * FROM favlinks ORDER BY id ASC', (error, result) => {
+    if (error) {
+      throw error
+    }
+    res.status(200).json(result.rows)
+  })
+}
+module.exports = {
+  getLinks,
+}
